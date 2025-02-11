@@ -1,4 +1,5 @@
 import json
+from pickletools import uint1
 from CRUD import CRUD
 
 class Usuario:
@@ -63,7 +64,3 @@ class Usuarios(CRUD):
                     cls.objetos.append(c)  # Corrigida a indentação
         except FileNotFoundError:
             pass
-
-u = Usuario(1, "pedro", "pedro@gmail.com", "12345")
-
-Usuarios.inserir(u)

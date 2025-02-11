@@ -2,10 +2,11 @@ import json
 from models.CRUD import CRUD
 
 class Produto:
-    def __init__(self, id, id_categoria, estado_de_uso, preco, estoque):
+    def __init__(self, id, id_categoria, estado_de_uso, nome, preco, estoque):
         self.__id = id
         self.__id_categoria = id_categoria
         self.__estado_de_uso = estado_de_uso
+        self.__nome = nome
         self.__preco = preco
         self.__estoque = estoque
 
@@ -21,6 +22,10 @@ class Produto:
     @property
     def estado_de_uso(self):
         return self.__estado_de_uso
+
+    @property
+    def nome(self):
+        return self.__nome
 
     @property
     def preco(self):
@@ -42,6 +47,10 @@ class Produto:
     @estado_de_uso.setter
     def estado_de_uso(self, novo_estado):
         self.__estado_de_uso = novo_estado
+    
+    @id.setter
+    def nome(self, novo_nome):
+        self.__nome = novo_nome
 
     @preco.setter
     def preco(self, novo_preco):
@@ -52,14 +61,14 @@ class Produto:
         self.__estoque = novo_estoque
 
     def __str__(self):
-        return f"id: {self.__id}, id_categoria: {self.__id_categoria}, estado_de_uso: {self.__estado_de_uso}, preco: {self.__preco}, estoque: {self.__estoque}"
+        return f"id: {self.__id}, id_categoria: {self.__id_categoria}, estado_de_uso: {self.__estado_de_uso}, nome: {self.__nome}, preco: {self.__preco}, estoque: {self.__estoque}"
 
 
 class Produtos(CRUD):
     @classmethod
     def salvar(cls):
         with open("produtos.json", mode="w") as arquivo:   # w - write
-            json.dump(cls.objetos, arquivo, indent=4, default=lambda obj: {"id": obj.id, "id_categoria": obj.id_categoria, "estado_de_uso": obj.estado_de_uso, "preco": obj.preco, "estoque": obj.estoque})
+            json.dump(cls.objetos, arquivo, indent=4, default=lambda obj: {"id": obj.id, "id_categoria": obj.id_categoria, "estado_de_uso": obj.estado_de_uso, "nome": obj.nome, "preco": obj.preco, "estoque": obj.estoque})
 
     @classmethod
     def abrir(cls):
@@ -68,7 +77,7 @@ class Produtos(CRUD):
             with open("produtos.json", mode="r") as arquivo:   # r - read
                 texto = json.load(arquivo)
                 for obj in texto:   
-                    c = Produto(obj["id"], obj["id_categoria"], obj["estado_de_uso"], obj["preco"], obj["estoque"])
+                    c = Produto(obj["id"], obj["id_categoria"], obj["estado_de_uso"], obj["nome"], obj["preco"], obj["estoque"])
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass
