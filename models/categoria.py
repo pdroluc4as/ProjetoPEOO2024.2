@@ -1,5 +1,5 @@
 import json
-from CRUD import CRUD
+from models.CRUD import CRUD
 
 class Categoria:
     def __init__(self, id, nome):

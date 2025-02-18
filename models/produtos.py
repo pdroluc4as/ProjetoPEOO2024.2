@@ -2,9 +2,9 @@ import json
 from models.CRUD import CRUD
 
 class Produto:
-    def __init__(self, id, id_categoria, estado_de_uso, nome, preco, estoque):
+    def __init__(self, id, estado_de_uso, nome, preco, estoque):
         self.__id = id
-        self.__id_categoria = id_categoria
+        self.__id_categoria = 0
         self.__estado_de_uso = estado_de_uso
         self.__nome = nome
         self.__preco = preco

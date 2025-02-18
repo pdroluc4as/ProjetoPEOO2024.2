@@ -1,11 +1,11 @@
 import json
-from CRUD import CRUD
+from models.CRUD import CRUD
 
 class Item:
-    def __init__(self, id, id_pedido, id_produto, preco, unidade, presente):
+    def __init__(self, id, preco, unidade, presente):
         self.__id = id
-        self.__id_pedido = id_pedido
-        self.__id_produto = id_produto
+        self.__id_pedido = 0
+        self.__id_produto = 0
         self.__preco = preco
         self.__unidade = unidade
         self.__presente = presente

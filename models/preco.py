@@ -2,9 +2,9 @@ import json
 from models.CRUD import CRUD
 
 class Preco:
-    def __init__(self, id, id_produto, data):
+    def __init__(self, id, data):
         self.__id = id
-        self.__id_produto = id_produto
+        self.__id_produto = 0
         self.__data = data
 
     # Getters

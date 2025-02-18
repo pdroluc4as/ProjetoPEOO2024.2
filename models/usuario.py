@@ -1,6 +1,5 @@
 import json
-from pickletools import uint1
-from CRUD import CRUD
+from models.CRUD import CRUD
 
 class Usuario:
     def __init__(self, id, nome, email, senha):

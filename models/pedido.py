@@ -2,9 +2,9 @@ import json
 from models.CRUD import CRUD
 
 class Pedido:
-    def __init__(self, id, id_usuario, data, entrega, nota_fiscal, status):
+    def __init__(self, id, data, entrega, nota_fiscal, status):
         self.__id = id
-        self.__id_usuario = id_usuario
+        self.__id_usuario = 0
         self.__data = data
         self.__entrega = entrega
         self.__nota_fiscal = nota_fiscal
