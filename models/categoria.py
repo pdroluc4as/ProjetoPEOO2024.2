@@ -44,9 +44,3 @@ class Categorias(CRUD):
           cls.objetos.append(c)
     except FileNotFoundError:
       pass
-
-
-
-c = Categoria(1, "Eletronicos")
-
-Categorias.inserir(c)

@@ -2,10 +2,10 @@ import json
 from models.CRUD import CRUD
 
 class Pedido:
-    def __init__(self, id, data, entrega, nota_fiscal, status):
+    def __init__(self, id, previsao, entrega, nota_fiscal, status):
         self.__id = id
         self.__id_usuario = 0
-        self.__data = data
+        self.__previsao = previsao
         self.__entrega = entrega
         self.__nota_fiscal = nota_fiscal
         self.__status = status
@@ -20,8 +20,8 @@ class Pedido:
         return self.__id_usuario
     
     @property
-    def data(self):
-        return self.__data
+    def previsao(self):
+        return self.__previsao
 
     @property
     def entrega(self):
@@ -44,9 +44,9 @@ class Pedido:
     def id_usuario(self, novo_id_usuario):
         self.__id_usuario = novo_id_usuario
 
-    @data.setter
-    def data(self, novo_data):
-        self.__data = novo_data
+    @previsao.setter
+    def previsao(self, novo_previsao):
+        self.__previsao = novo_previsao
 
     @entrega.setter
     def entrega(self, nova_entrega):
@@ -61,7 +61,7 @@ class Pedido:
         self.__status = novo_status
 
     def __str__(self):
-        return f"id: {self.__id}, id_usuario: {self.__id_usuario}, data: {self.__data}, entrega: {self.__entrega}, nota_fiscal: {self.__nota_fiscal}, status: {self.__status}"
+        return f"id: {self.__id}, id_usuario: {self.__id_usuario}, previsao: {self.__previsao}, entrega: {self.__entrega}, nota_fiscal: {self.__nota_fiscal}, status: {self.__status}"
     
 
 
@@ -69,7 +69,7 @@ class Pedidos(CRUD):
   @classmethod
   def salvar(cls):
     with open("pedidos.json", mode="w") as arquivo:   
-      json.dump(cls.objetos, arquivo, indent = 4, default=lambda obj: {"id": obj.id, "id_usuario": obj.id_usuario, "data": obj.data, "entrega": obj.entrega, "nota_fiscal": obj.nota_fiscal, "status": obj.status})
+      json.dump(cls.objetos, arquivo, indent = 4, default=lambda obj: {"id": obj.id, "id_usuario": obj.id_usuario, "previsao": obj.previsao, "entrega": obj.entrega, "nota_fiscal": obj.nota_fiscal, "status": obj.status})
 
   @classmethod
   def abrir(cls):
@@ -78,7 +78,7 @@ class Pedidos(CRUD):
       with open("pedidos.json", mode="r") as arquivo:   
         texto = json.load(arquivo)
         for obj in texto:   
-          c = Pedido(obj["id"], obj["id_usuario"], obj["data"], obj["entrega"], obj["nota_fiscal"], obj["status"])
+          c = Pedido(obj["id"], obj["id_usuario"], obj["previsao"], obj["entrega"], obj["nota_fiscal"], obj["status"])
           cls.objetos.append(c)
     except FileNotFoundError:
       pass

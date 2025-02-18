@@ -8,9 +8,9 @@ from models.usuario import Usuario, Usuarios
 class View:
     #CRIAR ADMIN
     def usuario_admin():
-        for c in View.cliente_listar():
+        for c in View.usuario_listar():
             if c.email == "admin": return
-        View.cliente_inserir("admin", "admin", "1234", "1234")
+        View.usuario_inserir("admin", "admin@g.com", "1234")
 
     #CLIENTE
     def usuario_inserir(nome, email, senha):
@@ -32,7 +32,7 @@ class View:
         Usuarios.excluir(c)    
 
     def usuario_autenticar(email, senha):
-        for c in View.cliente_listar():
+        for c in View.usuario_listar():
             if c.email == email and c.senha == senha:
                 return {"id" : c.id, "nome" : c.nome }
         return None
@@ -54,7 +54,7 @@ class View:
     def produto_listar_id(id):
         return Produtos.listar_id(id)
     
-    def produto_atualiazar(id, estado_de_uso, id_categoria, nome, preco, estoque):
+    def produto_atualizar(id, estado_de_uso, id_categoria, nome, preco, estoque):
         p = Produto(id, estado_de_uso, id_categoria, nome, preco, estoque)
         Produtos.atualizar(p)
 
@@ -75,7 +75,7 @@ class View:
     def preco_listar_id(id):
         return Precos.listar_id(id)
     
-    def preco_atualiazar(id, id_produto, data):
+    def preco_atualizar(id, id_produto, data):
         p = Preco(id, id_produto, data)
         Precos.atualizar(p)
 
@@ -99,7 +99,7 @@ class View:
     def pedido_listar_id(id):
         return Pedidos.listar_id(id)
     
-    def pedido_atualiazar(id, id_usuario, data, entrega, nota_fiscal, status):
+    def pedido_atualizar(id, id_usuario, data, entrega, nota_fiscal, status):
         p = Pedido(id, id_usuario, data, entrega, nota_fiscal, status)
         Pedidos.atualizar(p)
 
@@ -119,7 +119,7 @@ class View:
     def item_listar_id(id):
         return Itens.listar_id(id)
     
-    def item_atualiazar(id, id_pedido, id_produto, preco, unidade, presente):
+    def item_atualizar(id, id_pedido, id_produto, preco, unidade, presente):
         i = Pedido(id, id_pedido, id_produto, preco, unidade, presente)
         Itens.atualizar(i)
 
@@ -139,7 +139,7 @@ class View:
     def categoria_listar_id(id):
         return Categorias.listar_id(id)
     
-    def categoria_atualiazar(id, nome):
+    def categoria_atualizar(id, nome):
         c = Categorias(id, nome)
         Categorias.atualizar(c)
 
