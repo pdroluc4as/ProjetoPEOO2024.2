@@ -6,144 +6,155 @@ from models.produtos import Produto, Produtos
 from models.usuario import Usuario, Usuarios
 
 class View:
-    #CRIAR ADMIN
+    # Criar Admin
+    @staticmethod
     def usuario_admin():
         for c in View.usuario_listar():
-            if c.email == "admin": return
-        View.usuario_inserir("admin", "admin@g.com", "1234")
+            if c.email == "admin":
+                return
+        View.usuario_inserir("admin", "admin", "1234")
 
-    #CLIENTE
+    # Usuário
+    @staticmethod
     def usuario_inserir(nome, email, senha):
         c = Usuario(0, nome, email, senha)
         Usuarios.inserir(c)
 
+    @staticmethod
     def usuario_listar():
         return Usuarios.listar()    
 
+    @staticmethod
     def usuario_listar_id(id):
         return Usuarios.listar_id(id)    
 
+    @staticmethod
     def usuario_atualizar(id, nome, email, senha):
         c = Usuario(id, nome, email, senha)
         Usuarios.atualizar(c)
 
+    @staticmethod
     def usuario_excluir(id):
-        c = Usuario(id, "", "", "",)
-        Usuarios.excluir(c)    
+        Usuarios.excluir(id)    
 
+    @staticmethod
     def usuario_autenticar(email, senha):
         for c in View.usuario_listar():
             if c.email == email and c.senha == senha:
-                return {"id" : c.id, "nome" : c.nome }
+                return {"id": c.id, "nome": c.nome}
         return None
-    #CLIENTE
 
-    #Produtos
+    # Produto
+    @staticmethod
     def produto_inserir(estado_de_uso, id_categoria, nome, preco, estoque):
-        p = Produto(0)
-        p.estado_de_uso = estado_de_uso
-        p.nome = nome
-        p.preco = preco
-        p.estoque = estoque
-        p.id_categoria = id_categoria
+        p = Produto(0, estado_de_uso, id_categoria, nome, preco, estoque)
         Produtos.inserir(p)
 
+    @staticmethod
     def produto_listar():
         return Produtos.listar()
-    
+
+    @staticmethod
     def produto_listar_id(id):
         return Produtos.listar_id(id)
-    
+
+    @staticmethod
     def produto_atualizar(id, estado_de_uso, id_categoria, nome, preco, estoque):
         p = Produto(id, estado_de_uso, id_categoria, nome, preco, estoque)
         Produtos.atualizar(p)
 
+    @staticmethod
     def produto_excluir(id):
-        p = Produto(id, "", "", "", "")
-        Produtos.excluir(p)
-    #produtos
+        Produtos.excluir(id)
 
-    #Precos
+    # Preços
+    @staticmethod
     def preco_inserir(id_produto, data):
-        p = Preco(0, data)
-        p.id_produto = id_produto
+        p = Preco(0, id_produto, data)
         Precos.inserir(p)
 
+    @staticmethod
     def preco_listar():
         return Precos.listar()
-    
+
+    @staticmethod
     def preco_listar_id(id):
         return Precos.listar_id(id)
-    
+
+    @staticmethod
     def preco_atualizar(id, id_produto, data):
         p = Preco(id, id_produto, data)
         Precos.atualizar(p)
 
+    @staticmethod
     def preco_excluir(id):
-        p = Preco(id, None)
-        Precos.excluir(p)
-    #Precos
+        Precos.excluir(id)
 
-    #Pedidos
+    # Pedido
+    @staticmethod
     def pedido_inserir(id_usuario, data, entrega, nota_fiscal, status):
-        p = Pedido(0, data)
-        p.entrega = entrega
-        p.id_usuario = id_usuario
-        p.nota_fiscal = nota_fiscal
-        p.status = status
+        p = Pedido(0, id_usuario, data, entrega, nota_fiscal, status)
         Pedidos.inserir(p)
 
+    @staticmethod
     def pedido_listar():
         return Pedidos.listar()
-    
+
+    @staticmethod
     def pedido_listar_id(id):
         return Pedidos.listar_id(id)
-    
+
+    @staticmethod
     def pedido_atualizar(id, id_usuario, data, entrega, nota_fiscal, status):
         p = Pedido(id, id_usuario, data, entrega, nota_fiscal, status)
         Pedidos.atualizar(p)
 
+    @staticmethod
     def pedido_excluir(id):
-        p = Pedidos(id, None)
-        Pedidos.excluir(p)
-    #Pedidos
+        Pedidos.excluir(id)
 
-    #Item
+    # Item
+    @staticmethod
     def item_inserir(id_pedido, id_produto, preco, unidade, presente):
         i = Item(0, id_pedido, id_produto, preco, unidade, presente)
         Itens.inserir(i)
 
+    @staticmethod
     def item_listar():
         return Itens.listar()
-    
+
+    @staticmethod
     def item_listar_id(id):
         return Itens.listar_id(id)
-    
+
+    @staticmethod
     def item_atualizar(id, id_pedido, id_produto, preco, unidade, presente):
-        i = Pedido(id, id_pedido, id_produto, preco, unidade, presente)
+        i = Item(id, id_pedido, id_produto, preco, unidade, presente)
         Itens.atualizar(i)
 
+    @staticmethod
     def item_excluir(id):
-        i = Itens(id, None)
-        Itens.excluir(i)
-    #Item
+        Itens.excluir(id)
 
-    #Categoria
+    # Categoria
+    @staticmethod
     def categoria_inserir(nome):
         c = Categoria(0, nome)
         Categorias.inserir(c)
 
+    @staticmethod
     def categoria_listar():
         return Categorias.listar()
-    
+
+    @staticmethod
     def categoria_listar_id(id):
         return Categorias.listar_id(id)
-    
+
+    @staticmethod
     def categoria_atualizar(id, nome):
-        c = Categorias(id, nome)
+        c = Categoria(id, nome)
         Categorias.atualizar(c)
 
+    @staticmethod
     def categoria_excluir(id):
-        c = Categorias(id, "")
-        Categorias.excluir(c)
-    #Categoria
+        Categorias.excluir(id)

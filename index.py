@@ -23,13 +23,12 @@ class IndexUI:
         if op == "Cadastro de Pedidos": ManterPedidoUI.main()
         if op == "Cadastro de Preços": ManterPrecoUI.main()
         if op == "Cadastro de Produtos": pass
-        if op == "Abrir Agenda do Dia": pass
         if op == "Meus Dados": pass
 
     def menu_usuario():
         op = st.sidebar.selectbox("Menu", ["Horários Disponíveis", "Meus Dados"])
-        if op == "Horários Disponíveis": ListarHorarioUI.main()
-        if op == "Meus Dados": MeusDadosUI.main()
+        if op == "Horários Disponíveis": pass
+        if op == "Meus Dados": pass
 
     def sair_do_sistema():
         if st.sidebar.button("Sair"):
