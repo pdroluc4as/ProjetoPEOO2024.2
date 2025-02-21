@@ -3,81 +3,72 @@ import pandas as pd
 from views import View
 import time
 
-'''
-class ManterItemUI:
+class ManterProdutoUI:
     def main():
-        st.header("Cadastro de Itens")
+        st.header("Cadastro de Produto")
         tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
-        with tab1: ManterItemUI.listar()
-        with tab2: ManterItemUI.inserir()
-        with tab3: ManterItemUI.atualizar()
-        with tab4: ManterItemUI.excluir()
+        with tab1: ManterProdutoUI.listar()
+        with tab2: ManterProdutoUI.inserir()
+        with tab3: ManterProdutoUI.atualizar()
+        with tab4: ManterProdutoUI.excluir()
 
     def listar():
-        itens = View.item_listar()
-        if len(itens) == 0: 
-            st.write("Nenhum item cadastrado")
+        produtos = View.produto_listar()
+        if len(produtos) == 0: 
+            st.write("Nenhum produto cadastrado")
         else:    
-            #for obj in items: st.write(obj)
+            #for obj in produtos: st.write(obj)
             dic = []
-            for obj in itens: dic.append(obj.__dict__)
+            for obj in produtos: dic.append(obj.__dict__)
             df = pd.DataFrame(dic)
             st.dataframe(df)
 
     def inserir():
-        pedidos = View.pedido_listar()
-        produtos = View.produto_listar()
-        pedido = st.selectbox("Informe o pedido do item", pedidos, index = None)
-        produto = st.selectbox("Informe o produto do item", produtos, index = None)
-        preco = st.text_input("Informe o preço do item")
-        unidade = st.text_input("Informe a unidade")
-        presente = st.checkbox("Confirmado")
+        categorias = View.categorias_listar()
+        categorias = st.selectbox("Informe a categoria do produto", categorias, index = None)
+        estado_de_uso = st.text_input("Informe o estado de uso do produto")
+        nome = st.text_input("Informe o preço do produto")
+        preco = st.text_input("Informe o preço do produto")
+        estoque = st.text_input("Informe o estoque")
      
         if st.button("Inserir"):
-            id_pedido = None
-            id_produto = None
-            if pedido != None: id_pedido = pedido.id
-            if produto != None: id_produto = produto.id
-            View.item_inserir(id_produto, id_pedido, preco, unidade, presente)
-            st.success("Item inserido com sucesso")
+            id_categoria = None
+            if categoria != None: id_categoria = categoria.id
+            View.produto_inserir(id_categoria, estado_de_uso, nome, preco, estoque)
+            st.success("Produto inserido com sucesso")
             time.sleep(2)
             st.rerun()
 
     def atualizar():
-        itens = View.item_listar()
-        if len(itens) == 0: 
-            st.write("Nenhum item cadastrado")
+        produtos = View.produto_listar()
+        if len(produtos) == 0: 
+            st.write("Nenhum produto cadastrado")
         else:
-            pedidos = View.pedido_listar()
-            produtos = View.produto_listar()
-            op = st.selectbox("Atualização de cliente", itens)
-            id_pedido = None if op.id_pedido in [0, None] else op.id_pedido
-            id_produto = None if op.id_produto in [0, None] else op.id_produto
-            pedido = st.selectbox("Informe o novo pedido", pedidos, next((i for i, c in enumerate(pedidos) if c.id == id_pedido), None))
-            produto = st.selectbox("Informe o novo serviço", produtos, next((i for i, s in enumerate(produtos) if s.id == id_produto), None))
-            preco = st.text_input("Informe o novo nome do cliente", op.preco)
-            unidade = st.text_input("Informe o novo e-mail", op.unidade)
-            presente = st.checkbox("Nova confirmação", op.presente)
+            categorias = View.categoria_listar()
+            op = st.selectbox("Atualização do produto", produtos)
+            id_categoria = None if op.id_categoria in [0, None] else op.id_categoria
+            categoria = st.selectbox("Informe o novo categoria", categorias, next((i for i, c in enumerate(categorias) if c.id == id_categoria), None))
+            estado_de_uso = st.text_input("Informe o novo nome do cliente", op.estado_de_uso)
+            nome = st.text_input("Informe o novo nome do cliente", op.nome)
+            preco = st.text_input("Informe o novo e-mail", op.preco)
+            estoque = st.text_input("Informe o novo e-mail", op.estoque)
         
             if st.button("Atualizar"):
-                id_pedido = None
-                id_produto = None
-                if pedido != None: id_pedido = pedido.id
-                if produto != None: id_produto = produto.id
-                View.item_atualizar(op.id, id_pedido, id_produto, preco, unidade, presente)
-                st.success("item atualizado com sucesso")
+                id_categoria = None
+                if categoria != None: id_categoria = categoria.id
+                View.produto_atualizar(op.id, id_categoria, estado_de_uso, nome, preco, estoque)
+                st.success("Produto atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()
 
     def excluir():
-        itens = View.item_listar()
-        if len(itens) == 0: 
-            st.write("Nenhum item cadastrado")
+        produtos = View.produto_listar()
+        if len(produtos) == 0: 
+            st.write("Nenhum produto cadastrado")
         else:
-            op = st.selectbox("Exclusão de item", itens)
+            op = st.selectbox("Exclusão de produto", produtos)
             if st.button("Excluir"):
-                View.item_excluir(op.id)
-                st.success("Item excluído com sucesso")
+                View.produto_excluir(op.id)
+                st.success("Produto excluído com sucesso")
                 time.sleep(2)
                 st.rerun()
-                '''

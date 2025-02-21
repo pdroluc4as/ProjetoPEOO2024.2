@@ -9,24 +9,25 @@ class Categoria:
     def __str__(self):
         return f"id: {self.__id}, nome: {self.__nome}"
     
-    
-    def get_id(self):
+    # Getters
+    @property
+    def id(self):
         return self.__id
 
-    
-    def get_nome(self):
+    @property
+    def nome(self):
         return self.__nome
 
-    
-    def set_id(self, novo_id):
+    # Setters
+    @id.setter
+    def id(self, novo_id):
         self.__id = novo_id
 
-    
-    def set_nome(self, novo_nome):
+    @nome.setter
+    def nome(self, novo_nome):
         self.__nome = novo_nome
 
-
-
+   
 class Categorias(CRUD):
   @classmethod
   def salvar(cls):

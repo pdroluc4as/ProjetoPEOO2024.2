@@ -13,6 +13,7 @@ class View:
             if c.email == "admin":
                 return
         View.usuario_inserir("admin", "admin", "1234")
+    # Criar Admin
 
     # Usuário
     @staticmethod
@@ -43,6 +44,7 @@ class View:
             if c.email == email and c.senha == senha:
                 return {"id": c.id, "nome": c.nome}
         return None
+    # Usuário
 
     # Produto
     @staticmethod
@@ -66,6 +68,7 @@ class View:
     @staticmethod
     def produto_excluir(id):
         Produtos.excluir(id)
+    # Produto
 
     # Preços
     @staticmethod
@@ -89,6 +92,7 @@ class View:
     @staticmethod
     def preco_excluir(id):
         Precos.excluir(id)
+    # Preços
 
     # Pedido
     @staticmethod
@@ -112,6 +116,7 @@ class View:
     @staticmethod
     def pedido_excluir(id):
         Pedidos.excluir(id)
+    # Pedido
 
     # Item
     @staticmethod
@@ -135,6 +140,7 @@ class View:
     @staticmethod
     def item_excluir(id):
         Itens.excluir(id)
+    # Item
 
     # Categoria
     @staticmethod
@@ -158,3 +164,4 @@ class View:
     @staticmethod
     def categoria_excluir(id):
         Categorias.excluir(id)
+    # Categoria

@@ -52,7 +52,7 @@ class ManterUsuarioUI:
     def excluir():
         usuarios = View.usuario_listar()
         if len(usuarios) == 0: 
-            st.write("Nenhuma usuário cadastrado")
+            st.write("Nenhum usuário cadastrado")
         else:
             op = st.selectbox("Exclusão de usuario", usuarios)
             if st.button("Excluir"):

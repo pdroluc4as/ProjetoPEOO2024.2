@@ -4,6 +4,7 @@ from models.CRUD import CRUD
 class Usuario:
     def __init__(self, id, nome, email, senha):
         self.__id = id
+        
         self.__nome = nome
         self.__email = email
         self.__senha = senha
