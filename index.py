@@ -7,6 +7,7 @@ from templates.manterpedidoUI import ManterPedidoUI
 from templates.manterprecoUI import ManterPrecoUI
 from templates.manterprodutoUI import ManterPordutoUI
 from templates.meusdadosUI import MeusDadosUI
+from templates.meusdadosvendedorUI import MeusDadosVendedorUI
 import streamlit as st
 from views import View
 
@@ -30,6 +31,11 @@ class IndexUI:
         op = st.sidebar.selectbox("Menu", ["Horários Disponíveis", "Meus Dados"])
         if op == "Horários Disponíveis": pass
         if op == "Meus Dados": MeusDadosUI.main()
+
+    def menu_vendedor():
+        op = st.sidebar.selectbox("Menu", ["Minha Agenda", "Meus Dados"])
+        if op == "Minha Agenda": pass
+        if op == "Meus Dados": MeusDadosVendedorUI.main()
 
     def sair_do_sistema():
         if st.sidebar.button("Sair"):
