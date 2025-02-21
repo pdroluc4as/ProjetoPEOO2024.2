@@ -26,7 +26,7 @@ class ManterPedidoUI:
 
     def inserir():
         usuarios = View.usuario_listar()
-        usuario = st.selectbox("Informe o usuario do item", usuarios, index = None)
+        usuario = st.selectbox("Informe o usuario do pedido", usuarios, index = None)
         previsao = st.text_input("Informe a data e horário da previsão de entrega", datetime.now().strftime("%d/%m/%Y %H:%M"))
         entrega = st.text_input("Informe a data e horário da entrega", datetime.now().strftime("%d/%m/%Y %H:%M"))
         nota_fiscal = st.text_input("Informe a nota fiscal do pedido")
@@ -42,16 +42,16 @@ class ManterPedidoUI:
     def atualizar():
         pedidos = View.pedido_listar()
         if len(pedidos) == 0: 
-            st.write("Nenhum item cadastrado")
+            st.write("Nenhum pedido cadastrado")
         else:
             usuarios = View.usuario_listar()
-            op = st.selectbox("Atualização de cliente", pedidos)
+            op = st.selectbox("Atualização do pedido", pedidos)
             id_usuario = None if op.id_usuario in [0, None] else op.id_usuario
             usuario = st.selectbox("Informe o novo usuario", usuarios, next((i for i, c in enumerate(usuarios) if c.id == id_usuario), None))
-            previsao = st.text_input("Informe a nova data e horário do serviço", op.previsao.strftime("%d/%m/%Y %H:%M"))
-            entrega = st.text_input("Informe a nova data e horário do serviço", op.entrega.strftime("%d/%m/%Y %H:%M"))
-            nota_fiscal = st.text_input("Informe o novo nome do cliente", op.nota_fiscal)
-            status = st.text_input("Informe o novo e-mail", op.status)        
+            previsao = st.text_input("Informe a nova data e horário da previsão", op.previsao.strftime("%d/%m/%Y %H:%M"))
+            entrega = st.text_input("Informe a nova data e horário de quando foi entregue", op.entrega.strftime("%d/%m/%Y %H:%M"))
+            nota_fiscal = st.text_input("Informe a nova nota fiscal", op.nota_fiscal)
+            status = st.text_input("Informe o novo status do pedido", op.status)        
             if st.button("Atualizar"):
                 id_usuario = None
                 if usuario != None: id_usuario = usuario.id

@@ -9,7 +9,7 @@ class MeusDadosUI:
         MeusDadosUI.atualizar()
 
     def atualizar():
-        op = View.usuario_listar_id(st.session_state["cliente_id"])
+        op = View.usuario_listar_id(st.session_state["usuario_id"])
         nome = st.text_input("Informe o novo nome", op.nome)
         email = st.text_input("Informe o novo e-mail", op.email)
         senha = st.text_input("Informe a nova senha", op.senha, type="password")

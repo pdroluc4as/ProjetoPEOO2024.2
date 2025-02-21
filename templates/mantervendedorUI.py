@@ -24,9 +24,9 @@ class ManterVendedorUI:
             st.dataframe(df)
 
     def inserir():
-        nome = st.text_input("Informe o nome do usuário")
-        email = st.text_input("Informe o email do usuário")
-        senha = st.text_input("Informe a senha", type="password")
+        nome = st.text_input("Informe o nome do vendedor")
+        email = st.text_input("Informe o email do vendedor")
+        senha = st.text_input("Informe a senha do vendedor", type="password")
         if st.button("Inserir"):
             View.vendedor_inserir(nome, email, senha)
             st.success("Vendedor inserido com sucesso")
@@ -41,8 +41,8 @@ class ManterVendedorUI:
          
             op = st.selectbox("Atualização de vendedor", vendedores)
             nome = st.text_input("Informe o novo nome do vendedor", op.nome)
-            email = st.text_input("Informe o novo nome do vendedor", op.email)
-            senha = st.text_input("Informe a nova senha", op.senha, type="password")
+            email = st.text_input("Informe o novo email do vendedor", op.email)
+            senha = st.text_input("Informe a nova senha do vendedor", op.senha, type="password")
             if st.button("Atualizar"):
                 View.vendedor_atualizar(op.id, nome, email, senha)
                 st.success("Vendedor atualizado com sucesso")

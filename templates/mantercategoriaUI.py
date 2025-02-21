@@ -41,7 +41,7 @@ class ManterCategoriaUI:
             nome = st.text_input("Informe o novo nome do categoria", op.nome)
             if st.button("Atualizar"):
                 View.categoria_atualizar(op.id, nome)
-                st.success("categoria atualizado com sucesso")
+                st.success("Categoria atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()
 

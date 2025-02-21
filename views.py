@@ -4,7 +4,7 @@ from models.pedido import Pedido, Pedidos
 from models.preco import Preco, Precos
 from models.produtos import Produto, Produtos
 from models.usuario import Usuario, Usuarios
-from models.vebdedir import Vendedor, Vendedores
+from models.vendedor import Vendedor, Vendedores
 
 class View:
     # Criar Admin
@@ -51,24 +51,24 @@ class View:
     @staticmethod
     def vendedor_inserir(nome, email, senha):
         c = Vendedor(0, nome, email, senha)
-        vendedores.inserir(c)
+        Vendedores.inserir(c)
 
     @staticmethod
     def vendedor_listar():
-        return vendedores.listar()    
+        return Vendedores.listar()    
 
     @staticmethod
     def vendedor_listar_id(id):
-        return vendedores.listar_id(id)    
+        return Vendedores.listar_id(id)    
 
     @staticmethod
     def vendedor_atualizar(id, nome, email, senha):
         c = Vendedor(id, nome, email, senha)
-        vendedores.atualizar(c)
+        Vendedores.atualizar(c)
 
     @staticmethod
     def vendedor_excluir(id):
-        vendedores.excluir(id)    
+        Vendedores.excluir(id)    
 
     @staticmethod
     def vendedor_autenticar(email, senha):

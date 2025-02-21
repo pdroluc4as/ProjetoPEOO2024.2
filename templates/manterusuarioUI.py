@@ -36,12 +36,12 @@ class ManterUsuarioUI:
     def atualizar():
         usuarios = View.usuario_listar()
         if len(usuarios) == 0: 
-            st.write("Nenhum usuario cadastrado")
+            st.write("Nenhum usuário cadastrado")
         else:
          
             op = st.selectbox("Atualização de usuario", usuarios)
-            nome = st.text_input("Informe o novo nome do usuario", op.nome)
-            email = st.text_input("Informe o novo nome do usuario", op.email)
+            nome = st.text_input("Informe o novo nome do usuário", op.nome)
+            email = st.text_input("Informe o novo email do usuário", op.email)
             senha = st.text_input("Informe a nova senha", op.senha, type="password")
             if st.button("Atualizar"):
                 View.usuario_atualizar(op.id, nome, email, senha)
@@ -54,7 +54,7 @@ class ManterUsuarioUI:
         if len(usuarios) == 0: 
             st.write("Nenhum usuário cadastrado")
         else:
-            op = st.selectbox("Exclusão de usuario", usuarios)
+            op = st.selectbox("Exclusão de usuário", usuarios)
             if st.button("Excluir"):
                 View.usuario_excluir(op.id)
                 st.success("Usuário excluído com sucesso")

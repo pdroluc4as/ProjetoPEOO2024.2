@@ -16,7 +16,7 @@ class ManterPrecoUI:
     def listar():
         preços = View.preco_listar()
         if len(preços) == 0: 
-            st.write("Nenhum preco cadastrado")
+            st.write("Nenhum preço cadastrado")
         else:    
             #for obj in items: st.write(obj)
             dic = []
@@ -26,26 +26,26 @@ class ManterPrecoUI:
 
     def inserir():
         produtos = View.produto_listar()
-        produto = st.selectbox("Informe o produto do item", produtos, index = None)
-        data = st.text_input("Informe a data e horário do serviço", datetime.now().strftime("%d/%m/%Y %H:%M"))
+        produto = st.selectbox("Informe o produto do preço", produtos, index = None)
+        data = st.text_input("Informe a data e horário do preço", datetime.now().strftime("%d/%m/%Y %H:%M"))
         if st.button("Inserir"):
             id_produto = None
             if produto != None: id_produto = produto.id
             View.preco_inserir(id_produto, data)
-            st.success("Item inserido com sucesso")
+            st.success("Preço inserido com sucesso")
             time.sleep(2)
             st.rerun()
 
     def atualizar():
-        itens = View.item_listar()
-        if len(itens) == 0: 
-            st.write("Nenhum item cadastrado")
+        precos = View.preco_listar()
+        if len(precos) == 0: 
+            st.write("Nenhum preço cadastrado")
         else:
             produtos = View.produto_listar()
-            op = st.selectbox("Atualização de cliente", itens)
+            op = st.selectbox("Atualização do preço", itens)
             id_produto = None if op.id_produto in [0, None] else op.id_produto
             data = st.text_input("Informe a nova data e horário do preço", op.data.strftime("%d/%m/%Y %H:%M"))
-            produto = st.selectbox("Informe o novo produto", produtos, next((i for i, c in enumerate(produtos) if c.id == id_produto), None))
+            produto = st.selectbox("Informe o novo produto do preço", produtos, next((i for i, c in enumerate(produtos) if c.id == id_produto), None))
             if st.button("Atualizar"):
                 id_produto = None
                 if produto != None: id_produto = produto.id

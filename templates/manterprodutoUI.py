@@ -27,9 +27,9 @@ class ManterProdutoUI:
         categorias = View.categorias_listar()
         categorias = st.selectbox("Informe a categoria do produto", categorias, index = None)
         estado_de_uso = st.text_input("Informe o estado de uso do produto")
-        nome = st.text_input("Informe o preço do produto")
+        nome = st.text_input("Informe o nome do produto")
         preco = st.text_input("Informe o preço do produto")
-        estoque = st.text_input("Informe o estoque")
+        estoque = st.text_input("Informe a quantidade em estoque")
      
         if st.button("Inserir"):
             id_categoria = None
@@ -48,10 +48,10 @@ class ManterProdutoUI:
             op = st.selectbox("Atualização do produto", produtos)
             id_categoria = None if op.id_categoria in [0, None] else op.id_categoria
             categoria = st.selectbox("Informe o novo categoria", categorias, next((i for i, c in enumerate(categorias) if c.id == id_categoria), None))
-            estado_de_uso = st.text_input("Informe o novo nome do cliente", op.estado_de_uso)
-            nome = st.text_input("Informe o novo nome do cliente", op.nome)
-            preco = st.text_input("Informe o novo e-mail", op.preco)
-            estoque = st.text_input("Informe o novo e-mail", op.estoque)
+            estado_de_uso = st.text_input("Informe o novo estado de uso do produto", op.estado_de_uso)
+            nome = st.text_input("Informe o novo nome do produto", op.nome)
+            preco = st.text_input("Informe o novo do produto", op.preco)
+            estoque = st.text_input("Informe a nova quantidade em estoque", op.estoque)
         
             if st.button("Atualizar"):
                 id_categoria = None
