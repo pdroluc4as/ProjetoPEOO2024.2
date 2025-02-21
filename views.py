@@ -4,6 +4,7 @@ from models.pedido import Pedido, Pedidos
 from models.preco import Preco, Precos
 from models.produtos import Produto, Produtos
 from models.usuario import Usuario, Usuarios
+from models.vebdedir import Vendedor, Vendedores
 
 class View:
     # Criar Admin
@@ -45,6 +46,37 @@ class View:
                 return {"id": c.id, "nome": c.nome}
         return None
     # Usuário
+
+    # Vendedor
+    @staticmethod
+    def vendedor_inserir(nome, email, senha):
+        c = Vendedor(0, nome, email, senha)
+        vendedores.inserir(c)
+
+    @staticmethod
+    def vendedor_listar():
+        return vendedores.listar()    
+
+    @staticmethod
+    def vendedor_listar_id(id):
+        return vendedores.listar_id(id)    
+
+    @staticmethod
+    def vendedor_atualizar(id, nome, email, senha):
+        c = Vendedor(id, nome, email, senha)
+        vendedores.atualizar(c)
+
+    @staticmethod
+    def vendedor_excluir(id):
+        vendedores.excluir(id)    
+
+    @staticmethod
+    def vendedor_autenticar(email, senha):
+        for c in View.vendedor_listar():
+            if c.email == email and c.senha == senha:
+                return {"id": c.id, "nome": c.nome}
+        return None
+    # Vendedor
 
     # Produto
     @staticmethod
