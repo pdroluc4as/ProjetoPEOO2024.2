@@ -24,7 +24,7 @@ class ManterProdutoUI:
             st.dataframe(df)
 
     def inserir():
-        categorias = View.categorias_listar()
+        categorias = View.categoria_listar()
         categorias = st.selectbox("Informe a categoria do produto", categorias, index = None)
         estado_de_uso = st.text_input("Informe o estado de uso do produto")
         nome = st.text_input("Informe o nome do produto")
