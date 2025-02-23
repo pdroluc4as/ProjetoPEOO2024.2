@@ -68,14 +68,14 @@ class Pedido:
 class Pedidos(CRUD):
   @classmethod
   def salvar(cls):
-    with open("pedidos.json", mode="w") as arquivo:   
+    with open("pedidos_data.json", mode="w") as arquivo:   
       json.dump(cls.objetos, arquivo, indent = 4, default=lambda obj: {"id": obj.id, "id_usuario": obj.id_usuario, "previsao": obj.previsao, "entrega": obj.entrega, "nota_fiscal": obj.nota_fiscal, "status": obj.status})
 
   @classmethod
   def abrir(cls):
     cls.objetos = []
     try:
-      with open("pedidos.json", mode="r") as arquivo:   
+      with open("pedidos_data.json", mode="r") as arquivo:   
         texto = json.load(arquivo)
         for obj in texto:   
           c = Pedido(obj["id"], obj["id_usuario"], obj["previsao"], obj["entrega"], obj["nota_fiscal"], obj["status"])

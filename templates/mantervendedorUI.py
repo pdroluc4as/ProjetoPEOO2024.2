@@ -56,7 +56,7 @@ class ManterVendedorUI:
         else:
             op = st.selectbox("Exclusão de vendedor", vendedores)
             if st.button("Excluir"):
-                View.vendedor_excluir(op.id)
-                st.success("Vendedir excluído com sucesso")
+                View.vendedor_excluir(op)
+                st.success("Vendedor excluído com sucesso")
                 time.sleep(2)
                 st.rerun()

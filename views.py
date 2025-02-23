@@ -3,49 +3,49 @@ from models.item import Item, Itens
 from models.pedido import Pedido, Pedidos
 from models.preco import Preco, Precos
 from models.produtos import Produto, Produtos
-from models.usuario import Usuario, Usuarios
+from models.cliente import Cliente, Clientes
 from models.vendedor import Vendedor, Vendedores
 
 class View:
     # Criar Admin
     @staticmethod
     def usuario_admin():
-        for c in View.usuario_listar():
+        for c in View.cliente_listar():
             if c.email == "admin":
                 return
-        View.usuario_inserir("admin", "admin", "1234")
+        View.cliente_inserir("admin", "admin", "1234")
     # Criar Admin
 
-    # Usuário
+    # Cliente
     @staticmethod
-    def usuario_inserir(nome, email, senha):
-        c = Usuario(0, nome, email, senha)
-        Usuarios.inserir(c)
+    def cliente_inserir(nome, email, senha):
+        c = Cliente(0, nome, email, senha)
+        Clientes.inserir(c)
 
     @staticmethod
-    def usuario_listar():
-        return Usuarios.listar()    
+    def cliente_listar():
+        return Clientes.listar()    
 
     @staticmethod
-    def usuario_listar_id(id):
-        return Usuarios.listar_id(id)    
+    def cliente_listar_id(id):
+        return Clientes.listar_id(id)    
 
     @staticmethod
-    def usuario_atualizar(id, nome, email, senha):
-        c = Usuario(id, nome, email, senha)
-        Usuarios.atualizar(c)
+    def cliente_atualizar(id, nome, email, senha):
+        c = Cliente(id, nome, email, senha)
+        Clientes.atualizar(c)
 
     @staticmethod
-    def usuario_excluir(id):
-        Usuarios.excluir(id)    
+    def cliente_excluir(cliente):
+        Clientes.excluir(cliente)    
 
     @staticmethod
-    def usuario_autenticar(email, senha):
-        for c in View.usuario_listar():
+    def cliente_autenticar(email, senha):
+        for c in View.cliente_listar():
             if c.email == email and c.senha == senha:
                 return {"id": c.id, "nome": c.nome}
         return None
-    # Usuário
+    # Cliente
 
     # Vendedor
     @staticmethod
@@ -67,8 +67,8 @@ class View:
         Vendedores.atualizar(c)
 
     @staticmethod
-    def vendedor_excluir(id):
-        Vendedores.excluir(id)    
+    def vendedor_excluir(vendedor):
+        Vendedores.excluir(vendedor)    
 
     @staticmethod
     def vendedor_autenticar(email, senha):
@@ -80,8 +80,8 @@ class View:
 
     # Produto
     @staticmethod
-    def produto_inserir(estado_de_uso, id_categoria, nome, preco, estoque):
-        p = Produto(0, estado_de_uso, id_categoria, nome, preco, estoque)
+    def produto_inserir(id_categoria, vendedor, estado_de_uso, nome, preco, estoque):
+        p = Produto(0, id_categoria, vendedor.id, estado_de_uso, nome, preco, estoque)
         Produtos.inserir(p)
 
     @staticmethod
@@ -93,13 +93,22 @@ class View:
         return Produtos.listar_id(id)
 
     @staticmethod
-    def produto_atualizar(id, estado_de_uso, id_categoria, nome, preco, estoque):
-        p = Produto(id, estado_de_uso, id_categoria, nome, preco, estoque)
-        Produtos.atualizar(p)
+    def produto_atualizar(id, id_categoria, vendedor, estado_de_uso, nome, preco, estoque):
+        produtos = Produtos.listar()
+        for produto in produtos:
+            if produto.id == id:
+                produto.id_categoria = id_categoria
+                produto.id_vendedor = vendedor.id
+                produto.estado_de_uso = estado_de_uso
+                produto.nome = nome
+                produto.preco = preco
+                produto.estoque = estoque
+                Produtos.salvar() # Salvar as alterações
+                return
 
     @staticmethod
-    def produto_excluir(id):
-        Produtos.excluir(id)
+    def produto_excluir(produto):
+        Produtos.excluir(produto)
     # Produto
 
     # Preços
@@ -129,7 +138,7 @@ class View:
     # Pedido
     @staticmethod
     def pedido_inserir(id_usuario, data, entrega, nota_fiscal, status):
-        p = Pedido(0, id_usuario, data, entrega, nota_fiscal, status)
+        p = Pedido(id_usuario, data, entrega, nota_fiscal, status)
         Pedidos.inserir(p)
 
     @staticmethod
@@ -146,8 +155,8 @@ class View:
         Pedidos.atualizar(p)
 
     @staticmethod
-    def pedido_excluir(id):
-        Pedidos.excluir(id)
+    def pedido_excluir(pedido):
+        Pedidos.excluir(pedido)
     # Pedido
 
     # Item
@@ -194,6 +203,6 @@ class View:
         Categorias.atualizar(c)
 
     @staticmethod
-    def categoria_excluir(id):
-        Categorias.excluir(id)
+    def categoria_excluir(categoria):
+        Categorias.excluir(categoria)
     # Categoria

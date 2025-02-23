@@ -52,7 +52,7 @@ class ManterCategoriaUI:
         else:
             op = st.selectbox("Exclusão de categoria", categorias)
             if st.button("Excluir"):
-                View.categoria_excluir(op.id)
+                View.categoria_excluir(op)
                 st.success("Categoria excluído com sucesso")
                 time.sleep(2)
                 st.rerun()

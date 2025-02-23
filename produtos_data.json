@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "id_categoria": 1,
+        "id_vendedor": 1,
+        "estado_de_uso": "novo",
+        "nome": "celular",
+        "preco": "R$ 500,00",
+        "estoque": "5"
+    }
+]
