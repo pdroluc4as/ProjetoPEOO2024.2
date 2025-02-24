@@ -2,11 +2,10 @@ import json
 from models.CRUD import CRUD
 
 class Item:
-    def __init__(self, id, preco, unidade, presente):
+    def __init__(self, id, id_pedido, id_produto, unidade, presente):
         self.__id = id
-        self.__id_pedido = 0
-        self.__id_produto = 0
-        self.__preco = preco
+        self.__id_pedido = id_pedido
+        self.__id_produto = id_produto
         self.__unidade = unidade
         self.__presente = presente
     
@@ -22,10 +21,6 @@ class Item:
     @property
     def id_produto(self):
         return self.__id_produto
-
-    @property
-    def preco(self):
-        return self.__preco
 
     @property
     def unidade(self):
@@ -48,10 +43,6 @@ class Item:
     def id_produto(self, novo_id_produto):
         self.__id_produto = novo_id_produto
 
-    @preco.setter
-    def preco(self, nova_preco):
-        self.__preco = nova_preco
-
     @unidade.setter
     def unidade(self, nova_unidade):
         self.__unidade = nova_unidade
@@ -61,23 +52,23 @@ class Item:
         self.__presente = novo_presente
 
     def __str__(self):
-        return f"id: {self.__id}, id_pedido: {self.__id_pedido}, id_produto: {self.__id_produto}, preco: {self.__preco}, unidades: {self.__unidade}, presente: {self.__presente}"
+        return f"id: {self.__id}, id_pedido: {self.__id_pedido}, id_produto: {self.__id_produto}, unidades: {self.__unidade}, presente: {self.__presente}"
 
 
 class Itens(CRUD):
   @classmethod
   def salvar(cls):
-    with open("itens.json", mode="w") as arquivo:   
-      json.dump(cls.objetos, arquivo, indent = 4, default=lambda obj: {"id": obj.id, "id_pedido": obj.id_pedido, "id_produto": obj.id_produto, "preco": obj.preco, "unidade": obj.unidade, "presente": obj.presente})
+    with open("itens_data.json", mode="w") as arquivo:   
+      json.dump(cls.objetos, arquivo, indent = 4, default=lambda obj: {"id": obj.id, "id_pedido": obj.id_pedido, "id_produto": obj.id_produto, "unidade": obj.unidade, "presente": obj.presente})
 
   @classmethod
   def abrir(cls):
     cls.objetos = []
     try:
-      with open("itens.json", mode="r") as arquivo:   
+      with open("itens_data.json", mode="r") as arquivo:   
         texto = json.load(arquivo)
         for obj in texto:   
-          c = Item(obj["id"], obj["id_pedido"], obj["id_produto"], obj["preco"], obj["unidade"], obj["presente"])
+          c = Item(obj["id"], obj["id_pedido"], obj["id_produto"], obj["unidade"], obj["presente"])
           cls.objetos.append(c)
     except FileNotFoundError:
       pass

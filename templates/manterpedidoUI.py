@@ -14,7 +14,7 @@ class ManterPedidoUI:
         with tab4: ManterPedidoUI.excluir()
 
     def listar():
-        pedidos = View.item_listar()
+        pedidos = View.pedido_listar()
         if len(pedidos) == 0: 
             st.write("Nenhum pedido cadastrado")
         else:    
@@ -67,7 +67,7 @@ class ManterPedidoUI:
         else:
             op = st.selectbox("Exclusão de pedido", pedidos)
             if st.button("Excluir"):
-                View.item_excluir(op)
+                View.pedido_excluir(op)
                 st.success("Pedido excluído com sucesso")
                 time.sleep(2)
                 st.rerun()

@@ -20,7 +20,6 @@ class ManterProdutoUI:
             #for obj in produtos: st.write(obj)
             dic = []
             for obj in produtos: dic.append(obj.__dict__)
-            print(dic)
             df = pd.DataFrame(dic)
             st.dataframe(df)
 

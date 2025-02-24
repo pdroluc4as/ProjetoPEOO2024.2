@@ -28,7 +28,6 @@ class ManterItemUI:
         produtos = View.produto_listar()
         pedido = st.selectbox("Informe o pedido do item", pedidos, index = None)
         produto = st.selectbox("Informe o produto do item", produtos, index = None)
-        preco = st.text_input("Informe o preço do item")
         unidade = st.text_input("Informe a unidade")
         presente = st.checkbox("Confirmado")
      
@@ -37,7 +36,7 @@ class ManterItemUI:
             id_produto = None
             if pedido != None: id_pedido = pedido.id
             if produto != None: id_produto = produto.id
-            View.item_inserir(id_produto, id_pedido, preco, unidade, presente)
+            View.item_inserir(id_produto, id_pedido, unidade, presente)
             st.success("Item inserido com sucesso")
             time.sleep(2)
             st.rerun()
@@ -54,7 +53,6 @@ class ManterItemUI:
             id_produto = None if op.id_produto in [0, None] else op.id_produto
             pedido = st.selectbox("Informe o novo pedido do item", pedidos, next((i for i, c in enumerate(pedidos) if c.id == id_pedido), None))
             produto = st.selectbox("Informe o novo produto do item", produtos, next((i for i, s in enumerate(produtos) if s.id == id_produto), None))
-            preco = st.text_input("Informe o novo preço do item", op.preco)
             unidade = st.text_input("Informe a nova unidade do item", op.unidade)
             presente = st.checkbox("Nova confirmação", op.presente)
         
@@ -63,7 +61,7 @@ class ManterItemUI:
                 id_produto = None
                 if pedido != None: id_pedido = pedido.id
                 if produto != None: id_produto = produto.id
-                View.item_atualizar(op.id, id_pedido, id_produto, preco, unidade, presente)
+                View.item_atualizar(op.id, id_pedido, id_produto, unidade, presente)
                 st.success("Item atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()

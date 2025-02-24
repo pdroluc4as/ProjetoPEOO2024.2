@@ -138,7 +138,7 @@ class View:
     # Pedido
     @staticmethod
     def pedido_inserir(id_usuario, data, entrega, nota_fiscal, status):
-        p = Pedido(id_usuario, data, entrega, nota_fiscal, status)
+        p = Pedido(0, id_usuario, data, entrega, nota_fiscal, status)
         Pedidos.inserir(p)
 
     @staticmethod
@@ -161,8 +161,8 @@ class View:
 
     # Item
     @staticmethod
-    def item_inserir(id_pedido, id_produto, preco, unidade, presente):
-        i = Item(0, id_pedido, id_produto, preco, unidade, presente)
+    def item_inserir(id_pedido, id_produto, unidade, presente):
+        i = Item(0, id_pedido, id_produto, unidade, presente)
         Itens.inserir(i)
 
     @staticmethod
@@ -174,8 +174,8 @@ class View:
         return Itens.listar_id(id)
 
     @staticmethod
-    def item_atualizar(id, id_pedido, id_produto, preco, unidade, presente):
-        i = Item(id, id_pedido, id_produto, preco, unidade, presente)
+    def item_atualizar(id, id_pedido, id_produto, unidade, presente):
+        i = Item(id, id_pedido, id_produto, unidade, presente)
         Itens.atualizar(i)
 
     @staticmethod
