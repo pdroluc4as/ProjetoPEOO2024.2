@@ -42,7 +42,7 @@ class ManterPrecoUI:
             st.write("Nenhum preço cadastrado")
         else:
             produtos = View.produto_listar()
-            op = st.selectbox("Atualização do preço", itens)
+            op = st.selectbox("Atualização do preço", precos)
             id_produto = None if op.id_produto in [0, None] else op.id_produto
             data = st.text_input("Informe a nova data e horário do preço", op.data.strftime("%d/%m/%Y %H:%M"))
             produto = st.selectbox("Informe o novo produto do preço", produtos, next((i for i, c in enumerate(produtos) if c.id == id_produto), None))

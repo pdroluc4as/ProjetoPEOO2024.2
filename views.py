@@ -3,85 +3,60 @@ from models.item import Item, Itens
 from models.pedido import Pedido, Pedidos
 from models.preco import Preco, Precos
 from models.produtos import Produto, Produtos
-from models.cliente import Cliente, Clientes
-from models.vendedor import Vendedor, Vendedores
+from models.usuario import Usuario, Usuarios
 
 class View:
     # Criar Admin
     @staticmethod
     def usuario_admin():
-        for c in View.cliente_listar():
+        for c in View.usuario_listar():
             if c.email == "admin":
                 return
-        View.cliente_inserir("admin", "admin", "1234")
+        View.usuario_inserir("admin", "admin", "1234", False)
     # Criar Admin
 
-    # Cliente
+    # usuario
     @staticmethod
-    def cliente_inserir(nome, email, senha):
-        c = Cliente(0, nome, email, senha)
-        Clientes.inserir(c)
+    def usuario_inserir(nome, email, senha, vendedor):
+        c = Usuario(0, nome, email, senha, vendedor)
+        Usuarios.inserir(c)
 
     @staticmethod
-    def cliente_listar():
-        return Clientes.listar()    
+    def usuario_listar():
+        return Usuarios.listar()    
 
     @staticmethod
-    def cliente_listar_id(id):
-        return Clientes.listar_id(id)    
+    def usuario_listar_id(id):
+        return Usuarios.listar_id(id)    
 
     @staticmethod
-    def cliente_atualizar(id, nome, email, senha):
-        c = Cliente(id, nome, email, senha)
-        Clientes.atualizar(c)
+    def usuario_atualizar(id, nome, email, senha, vendedor):
+        c = Usuario(id, nome, email, senha, vendedor)
+        Usuarios.atualizar(c)
 
     @staticmethod
-    def cliente_excluir(cliente):
-        Clientes.excluir(cliente)    
+    def usuario_excluir(usuario):
+        Usuarios.excluir(usuario)    
 
     @staticmethod
-    def cliente_autenticar(email, senha):
-        for c in View.cliente_listar():
-            if c.email == email and c.senha == senha:
+    def usuario_autenticar(email, senha):
+        for c in View.usuario_listar():
+            if c.email == email and c.senha == senha and c.vendedor == False:
                 return {"id": c.id, "nome": c.nome}
         return None
-    # Cliente
-
-    # Vendedor
-    @staticmethod
-    def vendedor_inserir(nome, email, senha):
-        c = Vendedor(0, nome, email, senha)
-        Vendedores.inserir(c)
-
-    @staticmethod
-    def vendedor_listar():
-        return Vendedores.listar()    
-
-    @staticmethod
-    def vendedor_listar_id(id):
-        return Vendedores.listar_id(id)    
-
-    @staticmethod
-    def vendedor_atualizar(id, nome, email, senha):
-        c = Vendedor(id, nome, email, senha)
-        Vendedores.atualizar(c)
-
-    @staticmethod
-    def vendedor_excluir(vendedor):
-        Vendedores.excluir(vendedor)    
 
     @staticmethod
     def vendedor_autenticar(email, senha):
-        for c in View.vendedor_listar():
-            if c.email == email and c.senha == senha:
+        for c in View.usuario_listar():
+            if c.email == email and c.senha == senha and c.vendedor == True:
                 return {"id": c.id, "nome": c.nome}
         return None
-    # Vendedor
+    # Cliente
 
     # Produto
     @staticmethod
-    def produto_inserir(id_categoria, vendedor, estado_de_uso, nome, preco, estoque):
-        p = Produto(0, id_categoria, vendedor.id, estado_de_uso, nome, preco, estoque)
+    def produto_inserir(id_categoria, estado_de_uso, nome, preco, estoque):
+        p = Produto(0, id_categoria, estado_de_uso, nome, preco, estoque)
         Produtos.inserir(p)
 
     @staticmethod
@@ -93,12 +68,11 @@ class View:
         return Produtos.listar_id(id)
 
     @staticmethod
-    def produto_atualizar(id, id_categoria, vendedor, estado_de_uso, nome, preco, estoque):
+    def produto_atualizar(id, id_categoria, estado_de_uso, nome, preco, estoque):
         produtos = Produtos.listar()
         for produto in produtos:
             if produto.id == id:
                 produto.id_categoria = id_categoria
-                produto.id_vendedor = vendedor.id
                 produto.estado_de_uso = estado_de_uso
                 produto.nome = nome
                 produto.preco = preco
@@ -109,6 +83,13 @@ class View:
     @staticmethod
     def produto_excluir(produto):
         Produtos.excluir(produto)
+
+    def produto_listar_disponiveis():
+        produtos = View.produto_listar()
+        disponiveis = []
+        for h in produtos:
+            disponiveis.append(h)
+        return disponiveis
     # Produto
 
     # Preços

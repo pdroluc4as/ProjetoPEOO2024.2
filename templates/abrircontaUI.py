@@ -12,8 +12,10 @@ class AbrirContaUI:
         nome = st.text_input("Informe o nome")
         email = st.text_input("Informe o e-mail")
         senha = st.text_input("Informe a senha", type="password")
+        vendedor = st.checkbox("Vendedor")
         if st.button("Inserir"):
-            View.usuario_inserir(nome, email, senha)
+            View.usuario_inserir(nome, email, senha, vendedor)
             st.success("Conta criada com sucesso")
             time.sleep(2)
             st.rerun()
+        

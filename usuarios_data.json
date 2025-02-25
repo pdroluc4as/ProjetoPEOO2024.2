@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "nome": "admin",
+        "email": "admin",
+        "senha": "1234",
+        "vendedor": false
+    },
+    {
+        "id": 2,
+        "nome": "tales",
+        "email": "t@gmail.com",
+        "senha": "1234",
+        "vendedor": true
+    },
+    {
+        "id": 3,
+        "nome": "pedro",
+        "email": "p@gmail.com",
+        "senha": "1234",
+        "vendedor": false
+    }
+]

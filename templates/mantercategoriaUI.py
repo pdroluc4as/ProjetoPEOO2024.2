@@ -36,7 +36,6 @@ class ManterCategoriaUI:
         if len(categorias) == 0: 
             st.write("Nenhum categoria cadastrado")
         else:
-         
             op = st.selectbox("Atualização de categoria", categorias)
             nome = st.text_input("Informe o novo nome do categoria", op.nome)
             if st.button("Atualizar"):
