@@ -1,7 +1,7 @@
 from models.categoria import Categoria, Categorias
 from models.item import Item, Itens
 from models.pedido import Pedido, Pedidos
-from models.produtos import Produto, Produtos
+from models.produto import Produto, Produtos
 from models.usuario import Usuario, Usuarios
 
 class View:
