@@ -30,7 +30,7 @@ class ManterProdutoUI:
         nome = st.text_input("Informe o nome do produto")
         preco_str = st.text_input("Informe o preço do produto")
         estoque_str = st.text_input("Informe a quantidade em estoque")
-
+        data = st.text_input("Informe a data e horário do preço", datetime.now().strftime("%d/%m/%Y %H:%M"))
         if preco_str and estoque_str:  
             try:
                 preco = float(preco_str)
@@ -52,7 +52,7 @@ class ManterProdutoUI:
         if st.button("Inserir"):
             id_categoria = None
             if categoria != None: id_categoria = categoria.id
-            View.produto_inserir(id_categoria, estado_de_uso, nome, preco, estoque)
+            View.produto_inserir(id_categoria, estado_de_uso, nome, preco, estoque, data)
             st.success("Produto inserido com sucesso")
             time.sleep(2)
             st.rerun()
@@ -63,7 +63,7 @@ class ManterProdutoUI:
             st.write("Nenhum produto cadastrado")
         else:
             categorias = View.categoria_listar()
-            
+
             op = st.selectbox("Atualização do produto", produtos)
             id_categoria = None if op.id_categoria in [0, None] else op.id_categoria
             categoria = st.selectbox("Informe a nova categoria", categorias, next((i for i, c in enumerate(categorias) if c.id == id_categoria), None))
@@ -71,10 +71,11 @@ class ManterProdutoUI:
             nome = st.text_input("Informe o novo nome do produto", op.nome)
             preco = st.text_input("Informe o novo do produto", op.preco)
             estoque = st.text_input("Informe a nova quantidade em estoque", op.estoque)
+            data = st.text_input("Informe a nova data e horário do preço", op.data.strftime("%d/%m/%Y %H:%M"))
             if st.button("Atualizar"):
                 id_categoria = None
                 if categoria != None: id_categoria = categoria.id
-                View.produto_atualizar(op.id, id_categoria, estado_de_uso, nome, preco, estoque) 
+                View.produto_atualizar(op.id, id_categoria, estado_de_uso, nome, preco, estoque, data) 
                 st.success("Produto atualizado com sucesso")
                 time.sleep(2)
                 st.rerun()

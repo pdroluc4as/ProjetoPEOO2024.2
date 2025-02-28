@@ -4,11 +4,11 @@ from templates.abrircontaUI import AbrirContaUI
 from templates.mantercategoriaUI import ManterCategoriaUI
 from templates.manteritemUI import ManterItemUI
 from templates.manterpedidoUI import ManterPedidoUI
-from templates.manterprecoUI import ManterPrecoUI
 from templates.manterprodutoUI import ManterProdutoUI
 from templates.manterusuarioUI import ManterUsuarioUI
 from templates.meusdadosUI import MeusDadosUI
 from templates.mantercarrinhoUI import ManterCarrinhoUI
+from templates.graficoUI import GraficoUI
 from views import View
 
 class IndexUI:
@@ -18,12 +18,11 @@ class IndexUI:
         if op == "Abrir Conta": AbrirContaUI.main()
 
     def menu_admin():            
-        op = st.sidebar.selectbox("Menu", ["Cadastro de Usuarios", "Cadastro de Categorias", "Cadastro de Itens", "Cadastro de Pedidos", "Cadastro de Preços", "Cadastro de Produtos", "Meus Dados"])
+        op = st.sidebar.selectbox("Menu", ["Cadastro de Usuarios", "Cadastro de Categorias", "Cadastro de Itens", "Cadastro de Pedidos", "Cadastro de Produtos", "Meus Dados"])
         if op == "Cadastro de Usuarios": ManterUsuarioUI.main()
         if op == "Cadastro de Categorias": ManterCategoriaUI.main()
         if op == "Cadastro de Itens": ManterItemUI.main()
         if op == "Cadastro de Pedidos": ManterPedidoUI.main()
-        if op == "Cadastro de Preços": ManterPrecoUI.main()
         if op == "Cadastro de Produtos": ManterProdutoUI.main()
         if op == "Meus Dados": MeusDadosUI.main()
 
@@ -34,8 +33,9 @@ class IndexUI:
         if op == "Meus Dados": MeusDadosUI.main()
 
     def menu_vendedor():
-        op = st.sidebar.selectbox("Menu", ["Meus Produtos", "Meus Dados"])
+        op = st.sidebar.selectbox("Menu", ["Meus Produtos", "Gráfico de Preços", "Meus Dados"])
         if op == "Meus Produtos": ManterProdutoUI.main()
+        if op == "Gráfico de Preços": GraficoUI.main()
         if op == "Meus Dados": MeusDadosUI.main()
 
     def sair_do_sistema():

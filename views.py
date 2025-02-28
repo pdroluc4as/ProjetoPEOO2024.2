@@ -1,7 +1,6 @@
 from models.categoria import Categoria, Categorias
 from models.item import Item, Itens
 from models.pedido import Pedido, Pedidos
-from models.preco import Preco, Precos
 from models.produtos import Produto, Produtos
 from models.usuario import Usuario, Usuarios
 
@@ -60,8 +59,8 @@ class View:
 
     # Produto
     @staticmethod
-    def produto_inserir(id_categoria, estado_de_uso, nome, preco, estoque):
-        p = Produto(0, id_categoria, estado_de_uso, nome, preco, estoque)
+    def produto_inserir(id_categoria, estado_de_uso, nome, preco, estoque, data):
+        p = Produto(0, id_categoria, estado_de_uso, nome, preco, estoque, data)
         Produtos.inserir(p)
 
     @staticmethod
@@ -73,7 +72,7 @@ class View:
         return Produtos.listar_id(id)
 
     @staticmethod
-    def produto_atualizar(id, id_categoria, estado_de_uso, nome, preco, estoque):
+    def produto_atualizar(id, id_categoria, estado_de_uso, nome, preco, estoque, data):
         produtos = Produtos.listar()
         for produto in produtos:
             if produto.id == id:
@@ -82,6 +81,7 @@ class View:
                 produto.nome = nome
                 produto.preco = preco
                 produto.estoque = estoque
+                produto.data = data
                 Produtos.salvar() # Salvar as alterações
                 return
 
@@ -96,30 +96,6 @@ class View:
             disponiveis.append(h)
         return disponiveis
     # Produto
-
-    # Preços
-    @staticmethod
-    def preco_inserir(id_produto, data):
-        p = Preco(0, id_produto, data)
-        Precos.inserir(p)
-
-    @staticmethod
-    def preco_listar():
-        return Precos.listar()
-
-    @staticmethod
-    def preco_listar_id(id):
-        return Precos.listar_id(id)
-
-    @staticmethod
-    def preco_atualizar(id, id_produto, data):
-        p = Preco(id, id_produto, data)
-        Precos.atualizar(p)
-
-    @staticmethod
-    def preco_excluir(id):
-        Precos.excluir(id)
-    # Preços
 
     # Pedido
     @staticmethod

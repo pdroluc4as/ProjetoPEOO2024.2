@@ -10,6 +10,7 @@ class Pedido:
         self.__entrega = entrega
         self.__nota_fiscal = nota_fiscal
         self.__status = status
+        
 
     # Getters
     @property
