@@ -174,14 +174,28 @@ class View:
     @staticmethod
     def adicionar_ao_carrinho(id_produto, quantidade=1):
         produto = View.produto_listar_id(id_produto)
-        if produto:
-            if produto.nome in View.carrinho:
-                View.carrinho[produto.nome]["quantidade"] += quantidade
-            else:
-                View.carrinho[produto.nome] = {"preco": produto.preco, "quantidade": quantidade}
-            print(f"{produto.nome} adicionado ao carrinho!")
-        else:
+
+        if not produto:
             print("Produto não encontrado.")
+            return False  # Retorna falso indicando erro
+
+        # Verifica se já tem o produto no carrinho e qual seria a nova quantidade total
+        quantidade_no_carrinho = View.carrinho.get(produto.nome, {}).get("quantidade", 0)
+        nova_quantidade = quantidade_no_carrinho + quantidade
+
+        if nova_quantidade > produto.estoque:
+            print("Quantidade excede o estoque disponível.")
+            return False  # Retorna falso indicando erro
+
+        # Se passou na verificação, adiciona ao carrinho
+        if produto.nome in View.carrinho:
+            View.carrinho[produto.nome]["quantidade"] += quantidade
+        else:
+            View.carrinho[produto.nome] = {"preco": produto.preco, "quantidade": quantidade}
+
+        print(f"{produto.nome} adicionado ao carrinho!")
+        return True  # Indica que a adição foi bem-sucedida
+
 
     @staticmethod
     def remover_do_carrinho(id_produto):
@@ -194,6 +208,7 @@ class View:
             print(f"{produto.nome} removido do carrinho!")
         else:
             print("Produto não encontrado no carrinho.")
+
 
     @staticmethod
     def visualizar_carrinho():

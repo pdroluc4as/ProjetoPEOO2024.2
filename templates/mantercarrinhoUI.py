@@ -18,12 +18,19 @@ class ManterCarrinhoUI:
         with col1:
             st.subheader("Adicionar Produto")
             produto_id = st.selectbox("Selecione um produto", options=[p.id for p in produtos], format_func=lambda id: produtos_dict[id].nome)
-            quantidade = st.number_input("Quantidade", min_value=1, value=1, step=1)
-            if st.button("Adicionar ao Carrinho"):
-                View.adicionar_ao_carrinho(produto_id, quantidade)
-                st.session_state.carrinho = View.carrinho
-                st.success("Produto adicionado ao carrinho!")
-
+            
+            if produto_id:
+                estoque_disponivel = produtos_dict[produto_id].estoque  # Obtém o estoque do produto selecionado
+                quantidade = st.number_input("Quantidade", min_value=1, max_value=estoque_disponivel, value=1, step=1)
+            
+                if st.button("Adicionar ao Carrinho"):
+                    sucesso = View.adicionar_ao_carrinho(produto_id, quantidade)
+                    if sucesso:
+                        st.session_state.carrinho = View.carrinho
+                        st.success("Produto adicionado ao carrinho!")
+                    else:
+                        st.error("Quantidade excede o estoque disponível!")
+        
         with col2:
             st.subheader("Remover Produto")
             if st.session_state.carrinho:
@@ -32,9 +39,10 @@ class ManterCarrinhoUI:
                     for prod in produtos:
                         if prod.nome == produto_remover:
                             View.remover_do_carrinho(prod.id)
-                            st.session_state.carrinho = View.carrinho
+                            st.session_state.carrinho = View.carrinho  # Atualiza o estado do carrinho
                             st.success("Produto removido do carrinho!")
                             break
+
 
         st.subheader("Carrinho Atual")
         if st.session_state.carrinho:
