@@ -8,6 +8,7 @@ from templates.manterprodutoUI import ManterProdutoUI
 from templates.manterusuarioUI import ManterUsuarioUI
 from templates.meusdadosUI import MeusDadosUI
 from templates.mantercarrinhoUI import ManterCarrinhoUI
+from templates.graficoUI import GraficoUI
 from views import View
 
 class IndexUI:
@@ -32,8 +33,9 @@ class IndexUI:
         if op == "Meus Dados": MeusDadosUI.main()
 
     def menu_vendedor():
-        op = st.sidebar.selectbox("Menu", ["Meus Produtos", "Meus Dados"])
+        op = st.sidebar.selectbox("Menu", ["Meus Produtos", "Gráfico de Preços", "Meus Dados"])
         if op == "Meus Produtos": ManterProdutoUI.main()
+        if op == "Gráfico de Preços": GraficoUI.main()
         if op == "Meus Dados": MeusDadosUI.main()
 
     def sair_do_sistema():
