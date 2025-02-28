@@ -28,8 +28,8 @@ class ManterProdutoUI:
         categoria = st.selectbox("Informe a categoria do produto", categoria, index = None)
         estado_de_uso = st.text_input("Informe o estado de uso do produto")
         nome = st.text_input("Informe o nome do produto")
-        preco = st.text_input("Informe o preço do produto")
-        estoque = st.text_input("Informe a quantidade em estoque")
+        preco = float(st.number_input("Informe o preço do produto"))
+        estoque = int(st.number_input("Informe a quantidade em estoque"))
      
         if st.button("Inserir"):
             id_categoria = None

@@ -1,8 +1,7 @@
 virtual
 __pycache__
-clientes_data.json
+usuarios_data.json
 categorias_data.json
 produtos_data.json
-vendedores_data.json
 pedidos_data.json
 itens_data.json

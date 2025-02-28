@@ -61,7 +61,7 @@ class Produto:
         self.__estoque = novo_estoque
 
     def __str__(self):
-        return f"id: {self.__id}, id_categoria: {self.__id_categoria}, estado_de_uso: {self.__estado_de_uso}, nome: {self.__nome}, preco: {self.__preco}, estoque: {self.__estoque}"
+        return f"id: {self.__id}, id_categoria: {self.__id_categoria}, estado_de_uso: {self.__estado_de_uso}, nome: {self.__nome}, preco: {self.__preco:.2f}, estoque: {self.__estoque}"
 
 
 class Produtos(CRUD):

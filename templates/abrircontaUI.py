@@ -12,7 +12,7 @@ class AbrirContaUI:
         nome = st.text_input("Informe o nome")
         email = st.text_input("Informe o e-mail")
         senha = st.text_input("Informe a senha", type="password")
-        vendedor = st.checkbox("Vendedor")
+        vendedor = st.checkbox("É um vendedor?")
         if st.button("Inserir"):
             View.usuario_inserir(nome, email, senha, vendedor)
             st.success("Conta criada com sucesso")

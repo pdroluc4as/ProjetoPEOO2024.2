@@ -6,6 +6,7 @@ from models.produtos import Produto, Produtos
 from models.usuario import Usuario, Usuarios
 
 class View:
+    carrinho = {}
     # Criar Admin
     @staticmethod
     def usuario_admin():
@@ -20,6 +21,10 @@ class View:
     def usuario_inserir(nome, email, senha, vendedor):
         c = Usuario(0, nome, email, senha, vendedor)
         Usuarios.inserir(c)
+
+    @staticmethod
+    def usuario_inserir_carrinho():
+        pass
 
     @staticmethod
     def usuario_listar():
@@ -187,3 +192,43 @@ class View:
     def categoria_excluir(categoria):
         Categorias.excluir(categoria)
     # Categoria
+
+    # Carrinho
+    @staticmethod
+    def adicionar_ao_carrinho(id_produto, quantidade=1):
+        produto = View.produto_listar_id(id_produto)
+        if produto:
+            if produto.nome in View.carrinho:
+                View.carrinho[produto.nome]["quantidade"] += quantidade
+            else:
+                View.carrinho[produto.nome] = {"preco": produto.preco, "quantidade": quantidade}
+            print(f"{produto.nome} adicionado ao carrinho!")
+        else:
+            print("Produto não encontrado.")
+
+    @staticmethod
+    def remover_do_carrinho(id_produto):
+        produto = View.produto_listar_id(id_produto)
+        if produto and produto.nome in View.carrinho:
+            if View.carrinho[produto.nome]["quantidade"] > 1:
+                View.carrinho[produto.nome]["quantidade"] -= 1
+            else:
+                del View.carrinho[produto.nome]
+            print(f"{produto.nome} removido do carrinho!")
+        else:
+            print("Produto não encontrado no carrinho.")
+
+    @staticmethod
+    def visualizar_carrinho():
+        if not View.carrinho:
+            print("Carrinho vazio.")
+        else:
+            print("Carrinho de Compras:")
+            for nome, info in View.carrinho.items():
+                print(f"{nome} - {info['quantidade']}x - R${info['preco'] * info['quantidade']:.2f}")
+
+    @staticmethod
+    def total_carrinho():
+        total = sum(info["preco"] * info["quantidade"] for info in View.carrinho.values())
+        print(f"Total da compra: R${total:.2f}")
+    # Carrinho
