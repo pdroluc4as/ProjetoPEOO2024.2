@@ -72,7 +72,13 @@ class ManterProdutoUI:
             nome = st.text_input("Informe o novo nome do produto", op.nome)
             preco = st.text_input("Informe o novo do produto", op.preco)
             estoque = st.text_input("Informe a nova quantidade em estoque", op.estoque)
-            data = st.text_input("Informe a nova data e horário do preço", op.data.strftime("%d/%m/%Y %H:%M"))
+            # Converter op.data para datetime antes de chamar strftime()
+            try:
+                data_formatada = datetime.strptime(op.data, "%d/%m/%Y %H:%M").strftime("%d/%m/%Y %H:%M")
+            except ValueError:
+                data_formatada = op.data  # Caso a conversão falhe, mantém o valor original
+
+            data = st.text_input("Informe a nova data e horário do preço", data_formatada)
             if st.button("Atualizar"):
                 id_categoria = None
                 if categoria != None: id_categoria = categoria.id

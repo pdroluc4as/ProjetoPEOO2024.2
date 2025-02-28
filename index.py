@@ -18,12 +18,13 @@ class IndexUI:
         if op == "Abrir Conta": AbrirContaUI.main()
 
     def menu_admin():            
-        op = st.sidebar.selectbox("Menu", ["Cadastro de Usuarios", "Cadastro de Categorias", "Cadastro de Itens", "Cadastro de Pedidos", "Cadastro de Produtos", "Meus Dados"])
+        op = st.sidebar.selectbox("Menu", ["Cadastro de Usuarios", "Cadastro de Categorias", "Cadastro de Itens", "Cadastro de Pedidos", "Cadastro de Produtos", "Gráfico de Preços", "Meus Dados"])
         if op == "Cadastro de Usuarios": ManterUsuarioUI.main()
         if op == "Cadastro de Categorias": ManterCategoriaUI.main()
         if op == "Cadastro de Itens": ManterItemUI.main()
         if op == "Cadastro de Pedidos": ManterPedidoUI.main()
         if op == "Cadastro de Produtos": ManterProdutoUI.main()
+        if op == "Gráfico de Preços": GraficoUI.main()
         if op == "Meus Dados": MeusDadosUI.main()
 
     def menu_cliente():
