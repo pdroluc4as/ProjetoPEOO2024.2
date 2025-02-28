@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from views import View
 import time
+from datetime import datetime
 
 class ManterProdutoUI:
     def main():

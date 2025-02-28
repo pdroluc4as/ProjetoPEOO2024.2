@@ -36,7 +36,7 @@ class Produto:
     def estoque(self):
         return self.__estoque
     
-     @property
+    @property
     def data(self):
         return self.__data
 
